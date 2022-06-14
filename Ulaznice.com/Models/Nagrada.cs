@@ -7,6 +7,8 @@ namespace Ulaznice.com.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public string SlikaNagrade { get; set; }
         public Nagrada() { }
 

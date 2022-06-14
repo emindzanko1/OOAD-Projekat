@@ -6,9 +6,16 @@ namespace Ulaznice.com.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string MjestoDogađaja { get; set; }
+
+        [Required]
         public string GeografskaŠirina { get; set; }
-        public string GeografskaDužina { get; set; }    
+
+        [Required]
+        public string GeografskaDužina { get; set; }
+
+        [Required]
         public string OpisMjesta { get; set; }
         public Lokacija() { }
 

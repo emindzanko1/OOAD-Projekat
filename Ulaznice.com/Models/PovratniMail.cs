@@ -7,7 +7,11 @@ namespace Ulaznice.com.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public string Zahvalnica { get; set; }
+
+        [Required]
         public string PrikazKarte { get; set; }
         public PovratniMail() { }
     }

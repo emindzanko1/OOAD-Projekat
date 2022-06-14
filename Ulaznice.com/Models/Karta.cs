@@ -21,19 +21,20 @@ namespace Ulaznice.com.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 50, MinimumLength = 3, ErrorMessage = "Naziv mjesta događaja mora imati između 2 i 50 karaktera!")]
+        [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "Naziv mjesta događaja mora imati između 2 i 50 karaktera!")]
         public string MjestoDogađaja { get; set; }
 
-        [ValidateDate]
+        
         [DataType(DataType.Date)]
+        [ValidateDate]
         public DateTime DatumDogađaja { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 50, MinimumLength = 3, ErrorMessage = "Naziv izvođača mora imati između 2 i 50 karaktera!")]
+        [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "Naziv izvođača mora imati između 2 i 50 karaktera!")]
         public string IzvođačiDogađaja { get; set; }
 
         [Required]
-        //[Range(6.0, 1.0, ErrorMessage = "Cijena mora biti u opsegu između 1 i 1000 KM")]
+        [Range(1F, 1000F, ErrorMessage = "Cijena mora biti u opsegu između 1 i 1000 KM")]
         public float CijenaKarte { get; set; }
 
         [Required]

@@ -8,9 +8,11 @@ namespace Ulaznice.com.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [RegularExpression(@"[0-9| |a-z|A-Z]*", ErrorMessage = "Dozvoljeno je samo korištenje velikih i malih slova, brojeva i razmaka!")]
         public string Username { get; set; }
 
         [Required]
+        [RegularExpression(@"[0-9| |a-z|A-Z]*", ErrorMessage = "Dozvoljeno je samo korištenje velikih i malih slova, brojeva i razmaka!")]
         public string Password { get; set; }
 
         [Required]
@@ -18,7 +20,6 @@ namespace Ulaznice.com.Models
         public string Email { get; set; }
 
         [Required]
-
         public string BrojBankovnogRačuna { get; set; }
 
         [ForeignKey("Karta")]

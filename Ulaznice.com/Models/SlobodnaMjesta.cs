@@ -7,8 +7,14 @@ namespace Ulaznice.com.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public int BrojSlobodnihMjesta { get; set; }
+
+        [Required]
         public int BrojMjesta { get; set; }
+
+        [Required]
         public string PrikazMjesta { get; set; }
         public SlobodnaMjesta() { }
 

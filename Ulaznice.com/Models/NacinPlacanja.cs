@@ -6,6 +6,8 @@ namespace Ulaznice.com.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public string Plaćanje { get; set; }
         public NacinPlacanja() { }
 
