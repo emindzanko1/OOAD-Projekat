@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Ulaznice.com.Models.Manifestacija>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Karta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpisKupnjeKarte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NacinPlacanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NagradnaIgra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Legenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SlobodnaMjesta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VrijemeOdržavanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lokacija)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tip)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Karta.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpisKupnjeKarte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NacinPlacanja.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NagradnaIgra.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Legenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlobodnaMjesta.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrijemeOdržavanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lokacija.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tip)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
