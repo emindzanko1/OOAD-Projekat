@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ulaznice.com.Data;
 
-namespace Ulaznice.com.Data.Migrations
+namespace Ulaznice.com.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220615160312_PetaMigracija")]
-    partial class PetaMigracija
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,6 +282,9 @@ namespace Ulaznice.com.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PorukaDobitnikId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PorukaId")
                         .HasColumnType("int");
 
@@ -293,8 +294,12 @@ namespace Ulaznice.com.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KartaId");
+
                     b.HasIndex("NagradnaIgraId")
                         .IsUnique();
+
+                    b.HasIndex("PorukaDobitnikId");
 
                     b.ToTable("Korisnik");
                 });
@@ -562,11 +567,27 @@ namespace Ulaznice.com.Data.Migrations
 
             modelBuilder.Entity("Ulaznice.com.Models.Korisnik", b =>
                 {
-                    b.HasOne("Ulaznice.com.Models.NagradnaIgra", null)
+                    b.HasOne("Ulaznice.com.Models.Karta", "Karta")
+                        .WithMany()
+                        .HasForeignKey("KartaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ulaznice.com.Models.NagradnaIgra", "Nagradna")
                         .WithOne("Osoba")
                         .HasForeignKey("Ulaznice.com.Models.Korisnik", "NagradnaIgraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Ulaznice.com.Models.PorukaDobitnik", "Poruka")
+                        .WithMany()
+                        .HasForeignKey("PorukaDobitnikId");
+
+                    b.Navigation("Karta");
+
+                    b.Navigation("Nagradna");
+
+                    b.Navigation("Poruka");
                 });
 
             modelBuilder.Entity("Ulaznice.com.Models.Manifestacija", b =>

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ulaznice.com.Data;
 
-namespace Ulaznice.com.Data.Migrations
+namespace Ulaznice.com.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220615164123_ŠestaMigracija")]
-    partial class ŠestaMigracija
+    [Migration("20220615170940_PrvaMigracija")]
+    partial class PrvaMigracija
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -284,6 +284,9 @@ namespace Ulaznice.com.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PorukaDobitnikId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PorukaId")
                         .HasColumnType("int");
 
@@ -298,7 +301,7 @@ namespace Ulaznice.com.Data.Migrations
                     b.HasIndex("NagradnaIgraId")
                         .IsUnique();
 
-                    b.HasIndex("PorukaId");
+                    b.HasIndex("PorukaDobitnikId");
 
                     b.ToTable("Korisnik");
                 });
@@ -580,9 +583,7 @@ namespace Ulaznice.com.Data.Migrations
 
                     b.HasOne("Ulaznice.com.Models.PorukaDobitnik", "Poruka")
                         .WithMany()
-                        .HasForeignKey("PorukaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PorukaDobitnikId");
 
                     b.Navigation("Karta");
 

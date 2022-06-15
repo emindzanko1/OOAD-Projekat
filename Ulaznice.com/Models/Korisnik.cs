@@ -22,17 +22,23 @@ namespace Ulaznice.com.Models
         [Required]
         public string BrojBankovnogRačuna { get; set; }
 
-        [ForeignKey("Karta")]
+        [Required]
         public int KartaId { get; set; }
-        public Karta Karta { get; set; }
 
-        [ForeignKey("NagradnaIgra")]
+        [ForeignKey("KartaId")]
+        public virtual Karta Karta { get; set; }
+
+        [Required]
         public int NagradnaIgraId { get; set; }
-        public NagradnaIgra Nagradna { get; set; }
 
-        [ForeignKey("PorukaDobitnik")]
+        [ForeignKey("NagradnaIgraId")]
+        public virtual NagradnaIgra Nagradna { get; set; }
+
+        [Required]
         public int PorukaId { get; set; }
-        public PorukaDobitnik Poruka { get; set; } 
+
+        [ForeignKey("PorukaDobitnikId")]
+        public virtual PorukaDobitnik Poruka { get; set; } 
         public Korisnik() { }
 
     }
