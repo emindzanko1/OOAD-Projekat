@@ -70,18 +70,18 @@ namespace Ulaznice.com.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,KartaId,OpisKupnjeKarte,NacinPlacanjaId,NagradnaIgraId,Legenda,SlobodnaMjestaId,VrijemeOdržavanja,LokacijaId,Tip")] Manifestacija manifestacija)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(manifestacija);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["KartaId"] = new SelectList(_context.Karta, "Id", "Id", manifestacija.KartaId);
+            //}
+            /*ViewData["KartaId"] = new SelectList(_context.Karta, "Id", "Id", manifestacija.KartaId);
             ViewData["LokacijaId"] = new SelectList(_context.Lokacija, "Id", "Id", manifestacija.LokacijaId);
             ViewData["NacinPlacanjaId"] = new SelectList(_context.NacinPlacanjata, "Id", "Id", manifestacija.NacinPlacanjaId);
             ViewData["NagradnaIgraId"] = new SelectList(_context.NagradnaIgra, "Id", "Id", manifestacija.NagradnaIgraId);
-            ViewData["SlobodnaMjestaId"] = new SelectList(_context.SlobodnaMjesta, "Id", "Id", manifestacija.SlobodnaMjestaId);
-            return View(manifestacija);
+            ViewData["SlobodnaMjestaId"] = new SelectList(_context.SlobodnaMjesta, "Id", "Id", manifestacija.SlobodnaMjestaId);*/
+            //return View(manifestacija);
         }
 
         // GET: Manifestacija/Edit/5
