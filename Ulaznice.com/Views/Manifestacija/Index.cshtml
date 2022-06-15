@@ -42,6 +42,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Tip)
             </th>
+             <th>
+                <p>Qr kod</p>
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -77,6 +80,10 @@
                 @Html.DisplayFor(modelItem => item.Tip)
             </td>
             <td>
+                 <a  asp-controller="Home" asp-action="CreateQRCode">Generisi qr</a>
+         
+            </td>
+            <td>
                @if (User.IsInRole("Administrator"))
                 {
                  <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <nobr>|</nobr>
@@ -89,86 +96,4 @@
     </tbody>
 </table>
 
-<div class="row">
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5457/kako-i-zato-ubiti-mua" class="image">
-<img src="/img/sd2/262x150/usr/karte/kakobkctuzweb.jpg">
-<div class="date">16/06</div>
-</a>
-<a href="/karte/event/5457/kako-i-zato-ubiti-mua" class="name">KAKO I ZAŠTO UBITI MUŽA</a>
-<div class="location">BKC - TUZLA</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5390/sunset-festival" class="image">
-<img src="/img/sd2/262x150/usr/karte/sunsetweb.jpg">
-<div class="date">17 - 18/06</div>
-</a>
-<a href="/karte/event/5390/sunset-festival" class="name">SUNSET FESTIVAL</a>
-<div class="location">LAZIC HILL - TUTNJEVAC</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5420/lapsus-band" class="image">
-<img src="/img/sd2/262x150/usr/karte/lapsusweb.jpg">
-<div class="date">17/06</div>
-</a>
-<a href="/karte/event/5420/lapsus-band" class="name">LAPSUS BAND</a>
-<div class="location">Konoba Kastel</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5450/edo-maajka" class="image">
-<img src="/img/sd2/262x150/usr/karte/edomajkaweb.jpg">
-<div class="date">17/06</div>
-</a>
-<a href="/karte/event/5450/edo-maajka" class="name">EDO MAAJKA</a>
-<div class="location">SARTR</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5372/spike-fest" class="image">
-<img src="/img/sd2/262x150/usr/karte/spikeweb.jpg">
-<div class="date">17/06</div>
-</a>
-<a href="/karte/event/5372/spike-fest" class="name">SPIKE FEST</a>
-<div class="location">GRADSKA DVORANA VITEZ</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5381/denan-lonarevi" class="image">
-<img src="/img/sd2/262x150/usr/karte/lon850x370.jpg">
-<div class="date">18/06</div>
-</a>
-<a href="/karte/event/5381/denan-lonarevi" class="name">Dženan Lončarević</a>
-<div class="location">Sky Summer Stage</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5440/borba-zmajeva" class="image">
-<img src="/img/sd2/262x150/usr/karte/borbazmajeva_banner.jpg">
-<div class="date">18/06</div>
-</a>
-<a href="/karte/event/5440/borba-zmajeva" class="name">BORBA ZMAJEVA</a>
-<div class="location">Kolodvorska 12</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="event clearfix">
-<a href="/karte/event/5428/vlatko-stefanovski-miroslav-tadi" class="image">
-<img src="/img/sd2/262x150/usr/karte/vlatkoblweb.jpg">
-<div class="date">20/06</div>
-</a>
-<a href="/karte/event/5428/vlatko-stefanovski-miroslav-tadi" class="name">VLATKO STEFANOVSKI &amp; MIROSLAV TADIĆ</a>
-<div class="location">Tvrđava Kastel</div>
-</div>
-</div>
-</div>
 
