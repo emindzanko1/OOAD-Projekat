@@ -8,7 +8,7 @@ namespace Ulaznice.com.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        //[Required]
         public Korisnik Osoba { get; set; }
 
         [Required]

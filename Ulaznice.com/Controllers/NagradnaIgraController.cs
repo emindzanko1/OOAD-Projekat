@@ -66,15 +66,15 @@ namespace Ulaznice.com.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,OpisNagradneIgre,NagradaId,InformacijeODobitniku,PorukaDobitnikId")] NagradnaIgra nagradnaIgra)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(nagradnaIgra);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["NagradaId"] = new SelectList(_context.Nagrada, "Id", "Id", nagradnaIgra.NagradaId);
-            ViewData["PorukaDobitnikId"] = new SelectList(_context.PorukaDobitnik, "Id", "Id", nagradnaIgra.PorukaDobitnikId);
-            return View(nagradnaIgra);
+            //}
+            //ViewData["NagradaId"] = new SelectList(_context.Nagrada, "Id", "Id", nagradnaIgra.NagradaId);
+            //ViewData["PorukaDobitnikId"] = new SelectList(_context.PorukaDobitnik, "Id", "Id", nagradnaIgra.PorukaDobitnikId);
+            //return View(nagradnaIgra);
         }
 
         // GET: NagradnaIgra/Edit/5

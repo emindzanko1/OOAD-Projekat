@@ -6,8 +6,70 @@
     <h1 class="display-4">Dobro došli na Ulaznice</h1>
     <!-- <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> -->
     <div style="height: 25em; overflow: hidden";>
-    <img src="https://www.kupikartu.ba/img/sd2/850x370/usr/karte/stingweb.jpg" style="leftwidth: 35%">
+    <img src="https://www.kupikartu.ba/img/sd2/850x370/usr/karte/stingweb.jpg" style="leftwidth: 35%"> 
     </div>
+    <div style="margin-top: 2%; margin-bottom: 2% ">
+    <div id="myMap"
+     style="position:relative;width:1280px;height:400px;"></div>
+     </div>
  </b>
 </div>
-</div>
+
+<script type='text/javascript'
+src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async
+defer></script>
+
+<script type='text/javascript'>
+ function GetMap()
+ {
+ var map = new Microsoft.Maps.Map('#myMap', {
+ credentials: 'An6eLn-g_ZS5mhbIx_Ocjm959fgM78JXyh9uLWHNJulcJGfqtULK1gHwrbBSh52j',
+ center: new Microsoft.Maps.Location(43.8563, 18.4131),
+ mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+ zoom: 10
+ });
+ 
+  infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+            visible: false
+        });
+        infobox.setMap(map);
+
+        var Zetra = new Microsoft.Maps.Location(43.871803, 18.409501);
+        var Pin1 = new Microsoft.Maps.Pushpin(Zetra);
+        Pin1.metadata = {
+            title: 'Zetra Arena',
+            description: 'Olimpijska dvorana Juan Antonio Samaranch'
+        };
+        Microsoft.Maps.Events.addHandler(Pin1, 'click', pushpinClicked);
+        map.entities.push(Pin1);
+
+        var StadionGrbavica = new Microsoft.Maps.Location(43.846225, 18.387335);
+        var Pin2 = new Microsoft.Maps.Pushpin(StadionGrbavica);
+        Pin2.metadata = {
+            title: 'Stadion Grbavica',
+            description: 'Stadion Grbavica'
+        };
+        Microsoft.Maps.Events.addHandler(Pin2, 'click', pushpinClicked);
+        map.entities.push(Pin2);
+
+        var Cinestar = new Microsoft.Maps.Location(43.850343, 18.355158);
+        var Pin3 = new Microsoft.Maps.Pushpin(Cinestar);
+        Pin3.metadata = {
+            title: 'Cinestar',
+            description: 'CineStar 4DX Sarajevo (Bingo City Center)'
+        };
+        Microsoft.Maps.Events.addHandler(Pin3, 'click', pushpinClicked);
+        map.entities.push(Pin3);
+
+    }
+    function pushpinClicked(e) {
+        if (e.target.metadata) {
+            infobox.setOptions({
+                location: e.target.getLocation(),
+                title: e.target.metadata.title,
+                description: e.target.metadata.description,
+                visible: true
+            });
+        }
+    }   
+</script>
