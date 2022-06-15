@@ -13,22 +13,22 @@ namespace Ulaznice.com.Controllers
 {
 
     [Authorize(Roles = "Administrator, Korisnik")]
-    public class SlobodnaMjestaController : Controller
+    public class PorukaDobitnikController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SlobodnaMjestaController(ApplicationDbContext context)
+        public PorukaDobitnikController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: SlobodnaMjesta
+        // GET: PorukaDobitnik
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SlobodnaMjesta.ToListAsync());
+            return View(await _context.PorukaDobitnik.ToListAsync());
         }
 
-        // GET: SlobodnaMjesta/Details/5
+        // GET: PorukaDobitnik/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,41 +36,41 @@ namespace Ulaznice.com.Controllers
                 return NotFound();
             }
 
-            var slobodnaMjesta = await _context.SlobodnaMjesta
+            var porukaDobitnik = await _context.PorukaDobitnik
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (slobodnaMjesta == null)
+            if (porukaDobitnik == null)
             {
                 return NotFound();
             }
 
-            return View(slobodnaMjesta);
+            return View(porukaDobitnik);
         }
 
-        // GET: SlobodnaMjesta/Create
+        // GET: PorukaDobitnik/Create
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: SlobodnaMjesta/Create
+        // POST: PorukaDobitnik/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Create([Bind("Id,BrojSlobodnihMjesta,BrojMjesta,PrikazMjesta")] SlobodnaMjesta slobodnaMjesta)
+        public async Task<IActionResult> Create([Bind("Id,OdabirDobitnika")] PorukaDobitnik porukaDobitnik)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(slobodnaMjesta);
+                _context.Add(porukaDobitnik);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(slobodnaMjesta);
+            return View(porukaDobitnik);
         }
 
-        // GET: SlobodnaMjesta/Edit/5
+        // GET: PorukaDobitnik/Edit/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -79,23 +79,23 @@ namespace Ulaznice.com.Controllers
                 return NotFound();
             }
 
-            var slobodnaMjesta = await _context.SlobodnaMjesta.FindAsync(id);
-            if (slobodnaMjesta == null)
+            var porukaDobitnik = await _context.PorukaDobitnik.FindAsync(id);
+            if (porukaDobitnik == null)
             {
                 return NotFound();
             }
-            return View(slobodnaMjesta);
+            return View(porukaDobitnik);
         }
 
-        // POST: SlobodnaMjesta/Edit/5
+        // POST: PorukaDobitnik/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BrojSlobodnihMjesta,BrojMjesta,PrikazMjesta")] SlobodnaMjesta slobodnaMjesta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OdabirDobitnika")] PorukaDobitnik porukaDobitnik)
         {
-            if (id != slobodnaMjesta.Id)
+            if (id != porukaDobitnik.Id)
             {
                 return NotFound();
             }
@@ -104,12 +104,12 @@ namespace Ulaznice.com.Controllers
             {
                 try
                 {
-                    _context.Update(slobodnaMjesta);
+                    _context.Update(porukaDobitnik);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SlobodnaMjestaExists(slobodnaMjesta.Id))
+                    if (!PorukaDobitnikExists(porukaDobitnik.Id))
                     {
                         return NotFound();
                     }
@@ -120,10 +120,10 @@ namespace Ulaznice.com.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(slobodnaMjesta);
+            return View(porukaDobitnik);
         }
 
-        // GET: SlobodnaMjesta/Delete/5
+        // GET: PorukaDobitnik/Delete/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -132,31 +132,31 @@ namespace Ulaznice.com.Controllers
                 return NotFound();
             }
 
-            var slobodnaMjesta = await _context.SlobodnaMjesta
+            var porukaDobitnik = await _context.PorukaDobitnik
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (slobodnaMjesta == null)
+            if (porukaDobitnik == null)
             {
                 return NotFound();
             }
 
-            return View(slobodnaMjesta);
+            return View(porukaDobitnik);
         }
 
-        // POST: SlobodnaMjesta/Delete/5
+        // POST: PorukaDobitnik/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var slobodnaMjesta = await _context.SlobodnaMjesta.FindAsync(id);
-            _context.SlobodnaMjesta.Remove(slobodnaMjesta);
+            var porukaDobitnik = await _context.PorukaDobitnik.FindAsync(id);
+            _context.PorukaDobitnik.Remove(porukaDobitnik);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SlobodnaMjestaExists(int id)
+        private bool PorukaDobitnikExists(int id)
         {
-            return _context.SlobodnaMjesta.Any(e => e.Id == id);
+            return _context.PorukaDobitnik.Any(e => e.Id == id);
         }
     }
 }

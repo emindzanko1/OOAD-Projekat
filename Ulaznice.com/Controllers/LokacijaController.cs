@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +20,13 @@ namespace Ulaznice.com.Controllers
             _context = context;
         }
 
-        // GET: Lokacijas
+        // GET: Lokacija
         public async Task<IActionResult> Index()
         {
             return View(await _context.Lokacija.ToListAsync());
         }
 
-        // GET: Lokacijas/Details/5
+        // GET: Lokacija/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,7 +44,8 @@ namespace Ulaznice.com.Controllers
             return View(lokacija);
         }
 
-        // GET: Lokacijas/Create
+        // GET: Lokacija/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +56,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,MjestoDogađaja,GeografskaŠirina,GeografskaDužina,OpisMjesta")] Lokacija lokacija)
         {
             if (ModelState.IsValid)
@@ -65,7 +68,8 @@ namespace Ulaznice.com.Controllers
             return View(lokacija);
         }
 
-        // GET: Lokacijas/Edit/5
+        // GET: Lokacija/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,11 +85,12 @@ namespace Ulaznice.com.Controllers
             return View(lokacija);
         }
 
-        // POST: Lokacijas/Edit/5
+        // POST: Lokacija/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,MjestoDogađaja,GeografskaŠirina,GeografskaDužina,OpisMjesta")] Lokacija lokacija)
         {
             if (id != lokacija.Id)
@@ -116,9 +121,11 @@ namespace Ulaznice.com.Controllers
             return View(lokacija);
         }
 
-        // GET: Lokacijas/Delete/5
+        // GET: Lokacija/Delete/5
+        [Authorize(Roles = "Administrator")]
+
         public async Task<IActionResult> Delete(int? id)
-        {
+            {
             if (id == null)
             {
                 return NotFound();
@@ -134,9 +141,10 @@ namespace Ulaznice.com.Controllers
             return View(lokacija);
         }
 
-        // POST: Lokacijas/Delete/5
+        // POST: Lokacija/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var lokacija = await _context.Lokacija.FindAsync(id);

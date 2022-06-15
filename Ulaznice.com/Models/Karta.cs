@@ -10,9 +10,9 @@ namespace Ulaznice.com.Models
         protected override ValidationResult IsValid
                          (object date, ValidationContext validationContext)
         {
-            return ((DateTime)date >= DateTime.Now.AddDays(-14) && (DateTime)date <= DateTime.Now)
+            return ((DateTime)date <= DateTime.Now.AddDays(90) && (DateTime)date >= DateTime.Now)
                 ? ValidationResult.Success
-                : new ValidationResult("Validan je upis između 14 dana u prošlosti i danas!");
+                : new ValidationResult("Možete kupiti kartu samo za manifestacije u narednih 90 dana!");
         }
     }
     public class Karta

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Ulaznice.com.Models;
 
 namespace Ulaznice.com.Controllers
 {
+    [Authorize(Roles = "Administrator, Korisnik")]
     public class KartaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -46,6 +48,8 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: Karta/Create
+
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["PovratniMailId"] = new SelectList(_context.PovratniMail, "Id", "Id");
@@ -57,6 +61,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,MjestoDogađaja,DatumDogađaja,IzvođačiDogađaja,CijenaKarte,OpisDogađaja,PovratniMailId")] Karta karta)
         {
             if (ModelState.IsValid)
@@ -70,6 +75,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: Karta/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +97,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,MjestoDogađaja,DatumDogađaja,IzvođačiDogađaja,CijenaKarte,OpisDogađaja,PovratniMailId")] Karta karta)
         {
             if (id != karta.Id)
@@ -123,6 +130,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: Karta/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +152,7 @@ namespace Ulaznice.com.Controllers
         // POST: Karta/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var karta = await _context.Karta.FindAsync(id);

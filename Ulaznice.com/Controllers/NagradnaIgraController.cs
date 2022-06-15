@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using Ulaznice.com.Models;
 
 namespace Ulaznice.com.Controllers
 {
+
+    [Authorize(Roles = "Administrator, Korisnik")]
     public class NagradnaIgraController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -47,6 +50,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: NagradnaIgra/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["NagradaId"] = new SelectList(_context.Nagrada, "Id", "Id");
@@ -59,6 +63,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,OpisNagradneIgre,NagradaId,InformacijeODobitniku,PorukaDobitnikId")] NagradnaIgra nagradnaIgra)
         {
             if (ModelState.IsValid)
@@ -73,6 +78,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: NagradnaIgra/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,6 +101,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,OpisNagradneIgre,NagradaId,InformacijeODobitniku,PorukaDobitnikId")] NagradnaIgra nagradnaIgra)
         {
             if (id != nagradnaIgra.Id)
@@ -128,6 +135,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: NagradnaIgra/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,6 +158,7 @@ namespace Ulaznice.com.Controllers
         // POST: NagradnaIgra/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nagradnaIgra = await _context.NagradnaIgra.FindAsync(id);

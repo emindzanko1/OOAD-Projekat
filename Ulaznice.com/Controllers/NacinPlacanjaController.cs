@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using Ulaznice.com.Models;
 
 namespace Ulaznice.com.Controllers
 {
+
+    [Authorize(Roles = "Administrator, Korisnik")]
     public class NacinPlacanjaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -44,6 +47,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: NacinPlacanja/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,Plaćanje")] NacinPlacanja nacinPlacanja)
         {
             if (ModelState.IsValid)
@@ -66,6 +71,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: NacinPlacanja/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Plaćanje")] NacinPlacanja nacinPlacanja)
         {
             if (id != nacinPlacanja.Id)
@@ -117,6 +124,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: NacinPlacanja/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +145,7 @@ namespace Ulaznice.com.Controllers
         // POST: NacinPlacanja/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nacinPlacanja = await _context.NacinPlacanjata.FindAsync(id);

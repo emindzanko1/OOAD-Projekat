@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: Manifestacija/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["KartaId"] = new SelectList(_context.Karta, "Id", "Id");
@@ -65,6 +67,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Id,KartaId,OpisKupnjeKarte,NacinPlacanjaId,NagradnaIgraId,Legenda,SlobodnaMjestaId,VrijemeOdržavanja,LokacijaId,Tip")] Manifestacija manifestacija)
         {
             if (ModelState.IsValid)
@@ -82,6 +85,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: Manifestacija/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,6 +111,7 @@ namespace Ulaznice.com.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,KartaId,OpisKupnjeKarte,NacinPlacanjaId,NagradnaIgraId,Legenda,SlobodnaMjestaId,VrijemeOdržavanja,LokacijaId,Tip")] Manifestacija manifestacija)
         {
             if (id != manifestacija.Id)
@@ -143,6 +148,7 @@ namespace Ulaznice.com.Controllers
         }
 
         // GET: Manifestacija/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -168,6 +174,7 @@ namespace Ulaznice.com.Controllers
         // POST: Manifestacija/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var manifestacija = await _context.Manifestacija.FindAsync(id);

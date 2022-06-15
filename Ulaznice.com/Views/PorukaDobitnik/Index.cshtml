@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ulaznice.com.Models.SlobodnaMjesta>
+﻿@model IEnumerable<Ulaznice.com.Models.PorukaDobitnik>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,13 +16,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BrojSlobodnihMjesta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BrojMjesta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrikazMjesta)
+                @Html.DisplayNameFor(model => model.OdabirDobitnika)
             </th>
             <th></th>
         </tr>
@@ -31,16 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.BrojSlobodnihMjesta)
+                @Html.DisplayFor(modelItem => item.OdabirDobitnika)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BrojMjesta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrikazMjesta)
-            </td>
-            <td>
-               @if (User.IsInRole("Administrator"))
+                @if (User.IsInRole("Administrator"))
                 {
                  <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <nobr>|</nobr>
                  <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <nobr>|</nobr>

@@ -1,4 +1,4 @@
-﻿@model Ulaznice.com.Models.Nagrada
+﻿@model Ulaznice.com.Models.PorukaDobitnik
 
 @{
     ViewData["Title"] = "Details";
@@ -7,14 +7,14 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Nagrada</h4>
+    <h4>PorukaDobitnik</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SlikaNagrade)
+            @Html.DisplayNameFor(model => model.OdabirDobitnika)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SlikaNagrade)
+            @Html.DisplayFor(model => model.OdabirDobitnika)
         </dd>
     </dl>
 </div>
