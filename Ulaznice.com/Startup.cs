@@ -74,7 +74,7 @@ namespace Ulaznice.com
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=CreateQRCode}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
